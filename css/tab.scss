@@ -1,0 +1,57 @@
+.content {
+  width: 1100px;
+  margin: 0 auto;
+  margin-top: 64px;
+  padding-top: 10px;
+  .mdui-panel {
+    .mdui-panel-item {
+      .mdui-panel-item-header {
+        cursor: inherit;
+        .recover,.del {
+          margin-left: 20px;
+          cursor: pointer;
+          color: #3367d6;
+        }
+      }
+      .mdui-panel-item-body {
+        .tab {
+          font-size: 0px;
+          padding: 5px 0px 5px 30px;
+          cursor: pointer;
+          position: relative;
+          .tab-del {
+            display: none;
+            position: absolute;
+            left: 0px;
+            width: 18px;
+            height: 18px;
+            vertical-align: top;
+          }
+          .fac-icon {
+            width: 16px;
+            height: 16px;
+            vertical-align: top;
+            margin-right: 15px;
+          }
+          .title {
+            font-size: 13px;
+            color: #5a5a5a;
+          }
+          &:hover {
+            .tab-del {
+              display: block;
+            }
+            .fac-icon {
+              //width: 22px;
+              //height: 22px;
+            }
+            .title{
+              color: #e51c23;
+              //font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

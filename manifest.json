@@ -13,12 +13,11 @@
       "19": "images/tab19.png",
       "38": "images/tab38.png"
     }
-//  ,
-//    "default_title": "E-Tab",
-//    "default_popup": "e-tab.html"
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
   "permissions": [
     "tabs"
