@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "E-Tab",
+  "version": "0.1",
+  "description": "Tab扩展",
+  "icons": {
+    "16": "images/tab16.png",
+    "48": "images/tab48.png",
+    "128": "images/tab128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/tab19.png",
+      "38": "images/tab38.png"
+    }
+//  ,
+//    "default_title": "E-Tab",
+//    "default_popup": "e-tab.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "storage",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ]
+}
