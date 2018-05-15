@@ -1,8 +1,69 @@
+body {
+  background-color: #f1f1f1;
+}
+.mdui-appbar {
+ .mdui-toolbar {
+   .mdui-toolbar-spacer {
+     display: flex;
+     justify-content: center;
+     .search-wrapper {
+       height: 100%;
+       width: 700px;
+       //background-color: #ffffff;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       .search-cont {
+         display: flex;
+         height: 40px;
+         width: 100%;
+         background-color: rgba(0, 0, 0, 0.22);
+         border-radius: 3px;
+         .icon {
+           height: 40px;
+           width: 40px;
+           padding: 10px;
+           box-sizing: border-box;
+           svg {
+             color: #ffffff;
+           }
+         }
+         .text {
+           flex: 1;
+           height: 40px;
+           line-height: 40px;
+           padding: 0;
+           margin: 0;
+           border: 0;
+           background-color: rgba(255,255,255,0);
+           font-size: 14px;
+           color: #ffffff;
+           &:focus {
+             border: 0px;
+             outline:none;
+           }
+           &[placeholder]{
+           }
+           &::placeholder{
+             color: #ffffff;
+             font-size: 13px;
+           }
+         }
+       }
+     }
+   }
+ }
+}
+
 .content {
-  width: 1100px;
-  margin: 0 auto;
+  //width: 1100px;
+  //margin: 0 auto;
   margin-top: 64px;
   padding-top: 10px;
+
+  .right {
+    padding-right: 30px;
+  }
   .mdui-panel {
     .mdui-panel-item {
       .mdui-panel-item-header {

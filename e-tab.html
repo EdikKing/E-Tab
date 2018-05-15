@@ -14,31 +14,48 @@
             <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>-->
             <!--<a href="javascript:;" class="mdui-typo-headline">MDUI</a>-->
             <a href="javascript:;" class="mdui-typo-title">E-Tab</a>
-            <div class="mdui-toolbar-spacer" style="background: #fff;">1234</div>
+            <div class="mdui-toolbar-spacer">
+                <div class="search-wrapper">
+                    <div class="search-cont">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="#ffffff" preserveAspectRatio="xMidYMid meet" focusable="false"
+                                 style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                                <g>
+                                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <input type="text" v-model="searchText" placeholder="搜索标签" class="text">
+                    </div>
+                </div>
+            </div>
             <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
             <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">refresh</i></a>
             <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
         </div>
     </div>
 
-    <div class="content">
-        <div class="mdui-panel" mdui-panel>
+    <div class="mdui-container-fluid mdui-row content">
+        <div class="mdui-col-xs-2 left">123</div>
+        <div class="mdui-col-xs-10 right">
+            <div class="mdui-panel" mdui-panel>
 
-            <div v-for="(item,index) in getTabData" class="mdui-panel-item mdui-panel-item-open">
-                <div class="mdui-panel-item-header">
-                    <span class="time">创建于 {{item.id | formatDate}}</span>
-                    <span class="recover" @click="openAll(item.id)">恢复全部</span>
-                    <span class="del" @click="delAll(item.id)">删除全部</span>
-                </div>
-                <div class="mdui-panel-item-body">
-                    <div class="tab" v-for="(t,i) in item.data" @click="open(item.id,t.id,t.url)">
-                        <img class="tab-del" @click.stop="del(item.id,t.id)" src="images/del.png">
-                        <img class="fac-icon" :src="t.favIconUrl">
-                        <span class="title" v-text="t.title"></span>
+                <div v-for="(item,index) in getTabData" class="mdui-panel-item mdui-panel-item-open">
+                    <div class="mdui-panel-item-header">
+                        <span class="time">创建于 {{item.id | formatDate}}</span>
+                        <span class="recover" @click="openAll(item.id)">恢复全部</span>
+                        <span class="del" @click="delAll(item.id)">删除全部</span>
+                    </div>
+                    <div class="mdui-panel-item-body">
+                        <div class="tab" v-for="(t,i) in item.data" @click="open(item.id,t.id,t.url)">
+                            <img class="tab-del" @click.stop="del(item.id,t.id)" src="images/del.png">
+                            <img class="fac-icon" :src="t.favIconUrl">
+                            <span class="title" v-text="t.title"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 
