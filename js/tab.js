@@ -79,13 +79,11 @@ window.onload = function () {
                     localStorage.setItem('ETOD-' + timestamp, JSON.stringify(this.tabs))
                     this.oldData.unshift(timestamp)
 
-                    console.log(this.oldData.length)
                     if (this.oldData.length > 20) {
                         var id = this.oldData[this.oldData.length - 1]
                         localStorage.removeItem('ETOD-' + id)
                         this.oldData.splice(this.oldData.length - 1, 1)
                     }
-                    console.log(this.oldData.length)
 
                     localStorage.setItem('oldData', JSON.stringify(this.oldData))
                 },
