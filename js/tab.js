@@ -13,8 +13,21 @@ window.onload = function () {
                     var inst = new mdui.Drawer('#drawer');
                     inst.toggle();
                 },
+                getGistsData: function () {
+                    $.ajax({
+                        url: "https://demo.gitee.com/api/v5/gists/5dg9wq26bu3mxnhy4zojf58",
+                        data: {
+                            access_token: 'GGDupZM7iinUzAryWmxT'
+                        },
+                        success: function( result ) {
+                            console.log(result.files.data.content)
+                        }
+                    });
+                },
                 getTabs: function () {
                     var self = this
+
+                    self.getGistsData()
 
                     var oldData = localStorage.getItem("oldData")
                     if (oldData != "undefined" && oldData != null) {
