@@ -51,7 +51,8 @@
                     <div class="mdui-panel-item-body">
                         <div class="tab" v-for="(t,i) in item.data" @click="open(item.id,t.id,t.url)">
                             <img class="tab-del" @click.stop="del(item.id,t.id)" src="images/del.png">
-                            <img class="fac-icon" :src="t.favIconUrl">
+                            <!--<img class="fac-icon" :src="t.favIconUrl==''?'images/tab38.png':t.favIconUrl">-->
+                            <img class="fac-icon" :src="t.hasOwnProperty('favIconUrl')?t.favIconUrl:'images/tab38.png'">
                             <span class="title" v-text="t.title"></span>
                         </div>
                     </div>

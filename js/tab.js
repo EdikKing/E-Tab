@@ -27,6 +27,7 @@ window.onload = function () {
                             return b.id - a.id
                         })
                     }
+
                     //新进入
                     if (sessionStorage.getItem('history.length') != history.length) {
                         sessionStorage.setItem('history.length', history.length);
