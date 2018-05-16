@@ -5,11 +5,21 @@ window.onload = function () {
             el: '#app',
             data: {
                 tabs: [],
+                oldData: [],
                 searchText: ''
             },
             methods: {
+                openDrawer: function () {
+                    var inst = new mdui.Drawer('#drawer');
+                    inst.toggle();
+                },
                 getTabs: function () {
                     var self = this
+
+                    var oldData = localStorage.getItem("oldData")
+                    if (oldData != "undefined" && oldData != null) {
+                        self.oldData = JSON.parse(oldData)
+                    }
 
                     var oldTabs = localStorage.getItem(KEY)
                     if (oldTabs != "undefined" && oldTabs != null) {
@@ -54,9 +64,35 @@ window.onload = function () {
                             tab.data = newTabs
                             self.tabs.unshift(tab)
                             self.saveTabs()
+                            self.savaOldData()
                         }
                     })
 
+                },
+                saveTabs: function () {
+                    if (this.tabs != null) {
+                        localStorage.setItem(KEY, JSON.stringify(this.tabs))
+                    }
+                },
+                savaOldData: function () {
+                    var timestamp = new Date().getTime()
+                    localStorage.setItem('ETOD-' + timestamp, JSON.stringify(this.tabs))
+                    this.oldData.unshift(timestamp)
+
+                    console.log(this.oldData.length)
+                    if (this.oldData.length > 20) {
+                        var id = this.oldData[this.oldData.length - 1]
+                        localStorage.removeItem('ETOD-' + id)
+                        this.oldData.splice(this.oldData.length - 1, 1)
+                    }
+                    console.log(this.oldData.length)
+
+                    localStorage.setItem('oldData', JSON.stringify(this.oldData))
+                },
+                showOldData: function (id) {
+                    var oldData = localStorage.getItem('ETOD-' + id)
+                    this.tabs = JSON.parse(oldData)
+                    this.saveTabs()
                 },
                 del: function (pid, id) {
                     var tabs = this.tabs
@@ -81,10 +117,6 @@ window.onload = function () {
                             newTabs.push(tab)
                         }
                     }
-                    // this.tabs[parentIndex].data.splice(index, 1)
-                    // if (this.tabs[parentIndex].data.length === 0) {
-                    //     this.tabs.splice(parentIndex, 1)
-                    // }
                     this.tabs = newTabs
                     this.saveTabs()
                 },
@@ -118,7 +150,6 @@ window.onload = function () {
                     this.saveTabs()
                 },
                 open: function (pid, id, url) {
-                    // var tab = this.tabs[parentIndex].data[index]
                     window.chrome.tabs.create({
                         // windowId: wId,
                         // index: 0,
@@ -150,20 +181,11 @@ window.onload = function () {
                         }
                     }
 
-                },
-                saveTabs: function () {
-                    if (this.tabs != null) {
-                        localStorage.setItem(KEY, JSON.stringify(this.tabs))
-                    }
                 }
             },
-            mounted:
-
-                function () {
-                    this.getTabs()
-                }
-
-            ,
+            mounted: function () {
+                this.getTabs()
+            },
             computed: {
                 getTabData: function () {
                     var self = this
@@ -186,7 +208,7 @@ window.onload = function () {
             filters: {
                 formatDate: function (time) {
                     var date = new Date(time);
-                    return formatDate(date, 'yyyy-MM-dd hh:mm');
+                    return formatDate(date, 'yyyy-MM-dd hh:mm:ss');
                 }
             }
         }

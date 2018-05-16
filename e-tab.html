@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="css/tab.css">
     <script src="mdui/js/mdui.min.js"></script>
 </head>
-<body class="mdui-theme-primary-indigo">
+<body class="mdui-theme-primary-indigo ">
 <div id="app">
+
     <div class="mdui-appbar mdui-appbar-fixed">
         <div class="mdui-toolbar mdui-color-theme">
             <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>-->
             <!--<a href="javascript:;" class="mdui-typo-headline">MDUI</a>-->
-            <a href="javascript:;" class="mdui-typo-title">E-Tab</a>
+            <a class="mdui-typo-title">E-Tab</a>
             <div class="mdui-toolbar-spacer">
                 <div class="search-wrapper">
                     <div class="search-cont">
@@ -29,15 +30,16 @@
                     </div>
                 </div>
             </div>
-            <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
-            <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">refresh</i></a>
+            <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+            <a @click="openDrawer" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">replay</i></a>
             <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
         </div>
     </div>
 
-    <div class="mdui-container-fluid mdui-row content">
-        <div class="mdui-col-xs-2 left">123</div>
-        <div class="mdui-col-xs-10 right">
+
+    <div class="mdui-container content">
+
+        <div class="mdui-col-xs-12 right">
             <div class="mdui-panel" mdui-panel>
 
                 <div v-for="(item,index) in getTabData" class="mdui-panel-item mdui-panel-item-open">
@@ -59,8 +61,23 @@
         </div>
     </div>
 
+    <div class="mdui-drawer mdui-drawer-right mdui-drawer-close" id="drawer">
+        <div @click="openDrawer" class="back">
+            <i class="mdui-icon material-icons back-icon">keyboard_backspace</i>
+        </div>
+        <div class="cont">
+            <div class="drawer-title">历史版本</div>
+            <ul class="mdui-list mdui-list-dense">
+                <li v-for="(t,i) in oldData" @click="showOldData(t)" class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">access_time</i>
+                    <div class="mdui-list-item-content">{{t | formatDate}}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 </div>
-<script src="vue.min.js"></script>
-<script src="tab.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/tab.min.js"></script>
 </body>
 </html>

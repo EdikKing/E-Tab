@@ -1,58 +1,101 @@
 body {
   background-color: #f1f1f1;
 }
+
 .mdui-appbar {
- .mdui-toolbar {
-   .mdui-toolbar-spacer {
-     display: flex;
-     justify-content: center;
-     .search-wrapper {
-       height: 100%;
-       width: 700px;
-       //background-color: #ffffff;
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       .search-cont {
-         display: flex;
-         height: 40px;
-         width: 100%;
-         background-color: rgba(0, 0, 0, 0.22);
-         border-radius: 3px;
-         .icon {
-           height: 40px;
-           width: 40px;
-           padding: 10px;
-           box-sizing: border-box;
-           svg {
-             color: #ffffff;
-           }
-         }
-         .text {
-           flex: 1;
-           height: 40px;
-           line-height: 40px;
-           padding: 0;
-           margin: 0;
-           border: 0;
-           background-color: rgba(255,255,255,0);
-           font-size: 14px;
-           color: #ffffff;
-           &:focus {
-             border: 0px;
-             outline:none;
-           }
-           &[placeholder]{
-           }
-           &::placeholder{
-             color: #ffffff;
-             font-size: 13px;
-           }
-         }
-       }
-     }
-   }
- }
+  .mdui-toolbar {
+    .mdui-toolbar-spacer {
+      display: flex;
+      justify-content: center;
+      .search-wrapper {
+        height: 100%;
+        width: 700px;
+        //background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .search-cont {
+          display: flex;
+          height: 40px;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.22);
+          border-radius: 3px;
+          .icon {
+            height: 40px;
+            width: 40px;
+            padding: 10px;
+            box-sizing: border-box;
+            svg {
+              color: #ffffff;
+            }
+          }
+          .text {
+            flex: 1;
+            height: 40px;
+            line-height: 40px;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            background-color: rgba(255, 255, 255, 0);
+            font-size: 14px;
+            color: #ffffff;
+            &:focus {
+              border: 0px;
+              outline: none;
+            }
+            &::placeholder {
+              color: #ffffff;
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.mdui-drawer {
+  background-color: #fff;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+  display: flex;
+  flex-direction: column;
+  .back {
+    height: 64px;
+    line-height: 64px;
+    background-color: #3f51b5 !important;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+    .back-icon {
+      font-size: 30px;
+    }
+  }
+  .cont {
+    flex: 1;
+    overflow: auto;
+    .drawer-title {
+      font-size: 16px;
+      text-align: center;
+      height: 50px;
+      line-height: 50px;
+    }
+    .mdui-list {
+      .mdui-list-item {
+        font-size: 14px;
+        .mdui-list-item-icon {
+          font-size: 16px;
+        }
+        .mdui-list-item-content {
+          font-size: 14px;
+          margin-left: 5px;
+          padding-top: 7px;
+          color: #5a5a5a;
+        }
+      }
+    }
+  }
+
 }
 
 .content {
@@ -61,14 +104,37 @@ body {
   margin-top: 64px;
   padding-top: 10px;
 
+  .left {
+    .left-title {
+      font-size: 16px;
+      text-align: center;
+      height: 50px;
+      line-height: 50px;
+    }
+    .mdui-list {
+      .mdui-list-item {
+        font-size: 14px;
+        .mdui-list-item-icon {
+          font-size: 16px;
+        }
+        .mdui-list-item-content {
+          font-size: 14px;
+          margin-left: 5px;
+          padding-top: 7px;
+          color: #5a5a5a;
+        }
+      }
+    }
+  }
   .right {
-    padding-right: 30px;
+    //padding-right: 30px;
   }
   .mdui-panel {
     .mdui-panel-item {
       .mdui-panel-item-header {
         cursor: inherit;
-        .recover,.del {
+        font-size: 14px;
+        .recover, .del {
           margin-left: 20px;
           cursor: pointer;
           color: #3367d6;
@@ -83,6 +149,7 @@ body {
           .tab-del {
             display: none;
             position: absolute;
+            top: 4px;
             left: 0px;
             width: 18px;
             height: 18px;
@@ -91,8 +158,8 @@ body {
           .fac-icon {
             width: 16px;
             height: 16px;
-            vertical-align: top;
             margin-right: 15px;
+            vertical-align: top;
           }
           .title {
             font-size: 13px;
@@ -106,7 +173,7 @@ body {
               //width: 22px;
               //height: 22px;
             }
-            .title{
+            .title {
               color: #e51c23;
               //font-size: 18px;
             }
