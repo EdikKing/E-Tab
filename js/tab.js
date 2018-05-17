@@ -14,20 +14,20 @@ window.onload = function () {
                     inst.toggle();
                 },
                 getGistsData: function () {
-                    $.ajax({
-                        url: "https://demo.gitee.com/api/v5/gists/5dg9wq26bu3mxnhy4zojf58",
-                        data: {
-                            access_token: 'GGDupZM7iinUzAryWmxT'
-                        },
-                        success: function( result ) {
-                            console.log(result.files.data.content)
-                        }
-                    });
+                    // $.ajax({
+                    //     url: "https://demo.gitee.com/api/v5/gists/5dg9wq26bu3mxnhy4zojf58",
+                    //     data: {
+                    //         access_token: 'GGDupZM7iinUzAryWmxT'
+                    //     },
+                    //     success: function (result) {
+                    //         console.log(result.files.data.content)
+                    //     }
+                    // });
                 },
                 getTabs: function () {
                     var self = this
 
-                    self.getGistsData()
+                    // self.getGistsData()
 
                     var oldData = localStorage.getItem("oldData")
                     if (oldData != "undefined" && oldData != null) {
@@ -143,7 +143,8 @@ window.onload = function () {
                                 var newTab = []
                                 for (var j = 0; j < tab.data.length; j++) {
                                     var t = tab.data[j]
-                                    if (t.title.indexOf(self.searchText) == -1) {
+                                    // if (t.title.indexOf(self.searchText) == -1) {
+                                    if (!coverString(t.title, self.searchText)) {
                                         newTab.push(t)
                                     }
                                 }
@@ -182,7 +183,8 @@ window.onload = function () {
                             for (var j = 0; j < tab.data.length; j++) {
                                 var t = tab.data[j]
                                 if (self.searchText != '') {
-                                    if (t.title.indexOf(self.searchText) != -1) {
+                                    // if (t.title.indexOf(self.searchText) != -1) {
+                                    if (coverString(t.title, self.searchText)) {
                                         self.open(0, 0, t.url)
                                     }
                                 } else {
@@ -207,7 +209,8 @@ window.onload = function () {
                         var tab = tabs[i]
                         var tabArr = {id: tab.id}
                         tabArr.data = tab.data.filter(function (value2) {
-                            return value2.title.indexOf(self.searchText) != -1
+                            // return value2.title.indexOf(self.searchText) != -1
+                            return coverString(value2.title, self.searchText)
                         })
                         if (tabArr.data.length > 0) {
                             arr.push(tabArr)
@@ -250,5 +253,13 @@ function formatDate(date, fmt) {
 
 function padLeftZero(str) {
     return ('00' + str).substr(str.length)
+}
+
+function coverString(str, subStr) {
+    if(subStr == ''){
+        return true
+    }
+    var reg = eval('/' + subStr + '/ig');
+    return reg.test(str);
 }
 
