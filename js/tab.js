@@ -1,5 +1,8 @@
 var KEY = 'ediktabs1'
 
+var gitee_token = "1fe1bde37835ae021fb8a0a63f60e3e9"
+var gitee_id = "5dg9wq26bu3mxnhy4zojf58"
+
 window.onload = function () {
     new Vue({
             el: '#app',
@@ -8,21 +11,61 @@ window.onload = function () {
                 oldData: [],
                 searchText: ''
             },
+            mounted: function () {
+                this.getTabs()
+                this.getGistsData()
+            },
             methods: {
                 openDrawer: function () {
                     var inst = new mdui.Drawer('#drawer');
                     inst.toggle();
                 },
                 getGistsData: function () {
-                    // $.ajax({
-                    //     url: "https://demo.gitee.com/api/v5/gists/5dg9wq26bu3mxnhy4zojf58",
-                    //     data: {
-                    //         access_token: 'GGDupZM7iinUzAryWmxT'
-                    //     },
-                    //     success: function (result) {
-                    //         console.log(result.files.data.content)
-                    //     }
-                    // });
+                    var self = this
+                    $.ajax({
+                        url: "https://gitee.com/api/v5/gists/" + gitee_id,
+                        data: {
+                            access_token: gitee_token
+                        },
+                        success: function (result) {
+                            console.log(result)
+                            var content = '';
+                            try {
+                                content = result.files.data.content
+                                console.log(content)
+
+                                console.log(self.tabs)
+                            } catch (err) {
+                                console.log('读取数据出错')
+                            }
+                            if (content != '' && content == 'init') {
+                                self.patchGistsData()
+                            }
+
+                        }
+                    });
+                },
+                synsGistsData:function () {
+
+                },
+                patchGistsData: function () {
+                    $.ajax({
+                        type: 'PATCH',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        url: "https://gitee.com/api/v5/gists/" + gitee_id,
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            access_token: gitee_token,
+                            files: {data: {content: localStorage.getItem(KEY)}},
+                            description: "E-TAB"
+                        }),
+                        success: function (result) {
+                            console.log('保存成功')
+                        }
+                    });
                 },
                 getTabs: function () {
                     var self = this
@@ -163,15 +206,15 @@ window.onload = function () {
                     this.saveTabs()
                 },
                 open: function (pid, id, url) {
-                    window.chrome.tabs.create({
-                        // windowId: wId,
-                        // index: 0,
-                        url: url,
-                        active: false,
-                        pinned: false,
-                        // openerTabId: tId
-                    }, function (tab) {
-                    });
+                    // window.chrome.tabs.create({
+                    //     // windowId: wId,
+                    //     // index: 0,
+                    //     url: url,
+                    //     active: false,
+                    //     pinned: false,
+                    //     // openerTabId: tId
+                    // }, function (tab) {
+                    // });
                 },
                 openAll: function (pid) {
                     var self = this
@@ -196,9 +239,6 @@ window.onload = function () {
                     }
 
                 }
-            },
-            mounted: function () {
-                this.getTabs()
             },
             computed: {
                 getTabData: function () {
@@ -256,7 +296,7 @@ function padLeftZero(str) {
 }
 
 function coverString(str, subStr) {
-    if(subStr == ''){
+    if (subStr == '') {
         return true
     }
     var reg = eval('/' + subStr + '/ig');

@@ -49,11 +49,11 @@
                         <span class="del" @click="delAll(item.id)">删除全部</span>
                     </div>
                     <div class="mdui-panel-item-body">
-                        <div class="tab" v-for="(t,i) in item.data" @click="open(item.id,t.id,t.url)">
+                        <div class="tab" v-for="(t,i) in item.data" >
                             <img class="tab-del" @click.stop="del(item.id,t.id)" src="images/del.png">
                             <!--<img class="fac-icon" :src="t.favIconUrl==''?'images/tab38.png':t.favIconUrl">-->
                             <img class="fac-icon" :src="t.hasOwnProperty('favIconUrl')?t.favIconUrl:'images/tab38.png'">
-                            <span class="title" v-text="t.title"></span>
+                            <a class="title" :href="t.url" @click="open(item.id,t.id,t.url)" target="_blank" v-text="t.title"></a>
                         </div>
                     </div>
                 </div>
@@ -81,6 +81,6 @@
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/base64.min.js"></script>
 <script src="js/vue.min.js"></script>
-<script src="js/tab.min.js"></script>
+<script src="js/tab.js?v=0.1"></script>
 </body>
 </html>
